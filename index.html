@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101322">
+<title>Đọc Truyện Ultra V8 Mega</title>
+<style>
+:root{--bg:#0c1020;--panel:#151b2e;--panel2:#1c2440;--text:#eef1ff;--muted:#a5aecb;--accent:#9b7bff;--accent2:#5dd6c0;--line:#2b3554;--reader-size:19px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% 0%,#25204b 0,transparent 38%),linear-gradient(145deg,#0b1020,#11182a 65%,#17132a);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--text);background:var(--panel2);transition:.2s}button:hover{border-color:var(--accent);transform:translateY(-1px)}button.primary{background:linear-gradient(120deg,#7658e8,#a16bff);border:0;color:white;font-weight:700}button.ghost{background:transparent}button.danger{color:#ff9baf}
+header{position:sticky;top:0;z-index:5;background:#0c1020dd;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}.top{max-width:1280px;margin:auto;padding:14px 22px;display:flex;align-items:center;gap:18px}.brand{display:flex;align-items:center;gap:11px;font-size:21px;font-weight:850;letter-spacing:.2px;white-space:nowrap}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#9c7aff,#5dd6c0);display:grid;place-items:center;color:#11152a;font-size:23px;box-shadow:0 8px 28px #8065ff55}.search{flex:1;position:relative}.search input{width:100%;background:#171d31;border:1px solid var(--line);border-radius:13px;padding:12px 15px;color:var(--text);outline:none}.search input:focus{border-color:var(--accent)}.top-actions{display:flex;gap:8px}
+main{max-width:1280px;margin:30px auto;padding:0 22px 70px}.hero{position:relative;overflow:hidden;padding:34px;border:1px solid #ffffff18;border-radius:26px;background:linear-gradient(110deg,#29204d,#172c42 70%,#173a42);box-shadow:0 24px 70px #0005}.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:6%;top:-160px;background:#a58aff35;filter:blur(5px)}.eyebrow{color:#aeece0;font-weight:750;text-transform:uppercase;letter-spacing:2px;font-size:11px}.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.06;margin:12px 0}.hero p{color:#d1d8ef;max-width:620px;line-height:1.7;margin:0 0 22px}.hero-buttons{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:30px 0 15px}.section-head h2{margin:0;font-size:22px}.muted{color:var(--muted)}.library{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}.book{background:linear-gradient(160deg,#1b2340,#12182a);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;transition:.2s;min-width:0}.book:hover{transform:translateY(-4px);border-color:#8971e9;box-shadow:0 16px 35px #0004}.cover{height:190px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;font-size:clamp(16px,2vw,25px);font-weight:850;letter-spacing:.2px;line-height:1.25;color:#fff;text-shadow:0 3px 15px #0008;background:linear-gradient(135deg,#5340a3,#bd6e9d);overflow-wrap:anywhere;word-break:normal;overflow:hidden}.book:nth-child(4n+2) .cover{background:linear-gradient(135deg,#1f8b83,#183a6a)}.book:nth-child(4n+3) .cover{background:linear-gradient(135deg,#ad633d,#572c58)}.book:nth-child(4n+4) .cover{background:linear-gradient(135deg,#405c91,#28304e)}.book-info{padding:14px}.book-info h3{margin:0 0 7px;font-size:clamp(13px,1.2vw,16px);line-height:1.35;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.book-info p{font-size:clamp(10px,1vw,12px);line-height:1.45;color:var(--muted);margin:0 0 12px;overflow-wrap:anywhere}.progress{height:5px;border-radius:10px;background:#303a59;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.empty{grid-column:1/-1;border:1px dashed #465071;border-radius:18px;padding:35px;text-align:center;color:var(--muted)}
+.reader{display:none;margin-top:24px;background:#f4f0e8;color:#29251f;border-radius:22px;overflow:hidden;box-shadow:0 25px 80px #0006}.reader.active{display:block}.reader-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:13px 18px;background:#e7e0d4;border-bottom:1px solid #d4cbbb}.reader-toolbar button{color:#29251f;background:#f9f6f0;border-color:#d4cbbb}.reader-content{max-width:820px;margin:auto;padding:clamp(22px,5vw,65px) 24px 80px}.reader-content .chapter-label{text-align:center;color:#897e6c;font-size:12px;letter-spacing:2px;text-transform:uppercase}.reader-content h2{text-align:center;font-family:Georgia,serif;font-size:clamp(27px,4vw,38px);margin:12px 0 35px}.story{font-family:Georgia,'Times New Roman',serif;font-size:clamp(15px,var(--reader-size),30px);line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}.story p{margin:0 0 1.25em}.reader-footer{display:flex;justify-content:space-between;gap:10px;margin-top:35px}
+.modal{position:fixed;inset:0;background:#050713c9;backdrop-filter:blur(8px);z-index:20;display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.dialog{width:min(600px,100%);max-height:88vh;max-height:88dvh;overflow-y:auto;background:#171e32;border:1px solid var(--line);border-radius:20px;padding:clamp(14px,3vw,22px);box-shadow:0 30px 90px #0008}.dialog h2{margin:0 0 8px}.dialog p{color:var(--muted);font-size:14px;line-height:1.6}.dialog input,.dialog textarea{width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#0e1425;color:var(--text);margin:7px 0 13px;outline:none}.dialog textarea{min-height:120px;max-height:32vh;resize:vertical}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#202b43;color:white;border:1px solid #536180;border-radius:12px;padding:11px 17px;opacity:0;pointer-events:none;transition:.25s;z-index:40}.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#737f9e;padding:35px 15px;font-size:12px}
+body.light{--bg:#f4f6fb;--panel:#fff;--panel2:#edf0fa;--text:#20263a;--muted:#66708b;--line:#d8deed;background:#f4f6fb;color:var(--text)}body.light header{background:#ffffffdf}body.light .search input{background:white;color:#20263a}body.light .book{background:white}body.light .dialog{background:white}body.light .dialog input,body.light .dialog textarea{background:#f7f8fc;color:#20263a}
+@media(max-width:900px){.library{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:650px){.top{padding:11px 14px;flex-wrap:wrap}.brand{font-size:18px}.search{order:3;flex-basis:100%}.top-actions button{padding:9px}.top-actions .label{display:none}main{padding:0 14px 45px;margin:18px auto}.hero{padding:25px 21px}.library{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cover{height:132px;font-size:clamp(14px,4vw,19px);padding:10px}.book-info{padding:10px}.book-info h3{font-size:13px}.section-head h2{font-size:19px}.reader-toolbar{padding:10px}.reader-content{padding:30px 20px 55px}}
+@media(max-width:370px){.library{grid-template-columns:1fr}.cover{height:145px;font-size:18px}.section-head{align-items:flex-start;flex-wrap:wrap}.reader-content h2{font-size:25px}.story{font-size:16px}.dialog{max-height:84dvh}}
+.video-card{background:linear-gradient(160deg,#1b2340,#12182a);border:1px solid var(--line);border-radius:18px;overflow:hidden;min-width:0}
+.video-thumb{height:145px;display:grid;place-items:center;background:linear-gradient(135deg,#29204d,#16424a);font-size:48px}
+.video-card .book-info{padding:13px}.video-card .book-info button{margin-top:10px;width:100%}
+#moviePlayer{display:block}
+
+/* ULTRA V6 — responsive visual layer */
+.ultra-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:24px 0 8px}
+.stat{padding:17px 18px;border:1px solid #ffffff18;border-radius:17px;background:linear-gradient(135deg,#202a49,#172c3b);box-shadow:0 12px 30px #0002;min-width:0}
+.stat span{display:block;color:#b8c3e3;font-size:12px}.stat strong{display:block;font-size:clamp(22px,3vw,30px);margin-top:5px}
+.library-actions{display:flex;gap:8px;flex-wrap:wrap}.sort-label{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:13px}
+.sort-label select{background:#171d31;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px;max-width:190px}
+.book{position:relative}.book-tools{display:flex;gap:6px;margin-top:10px}.book-tools button{padding:6px 9px;font-size:12px;flex:1}.favorite-btn.active{color:#ffd66b;border-color:#9c7a36;background:#45391d}
+.reader-notes{margin-top:36px;padding:17px;border-radius:15px;background:#e9e1d3;border:1px solid #d4cbbb}
+.reader-notes h3{margin:0 0 9px;font:700 16px system-ui;color:#443d32}
+.reader-notes textarea{width:100%;min-height:85px;padding:11px;border-radius:10px;border:1px solid #cfc5b5;background:#fffdf8;color:#29251f;resize:vertical;font:14px/1.6 system-ui}
+.reader-notes button{margin:8px 8px 0 0}.reader-notes #notesStatus{font-size:12px}
+.reader.focus .reader-toolbar,.reader.focus .reader-notes,.reader.focus .reader-footer{display:none}
+@media(max-width:700px){.ultra-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stat{padding:12px}.library-actions{width:100%}.sort-label{width:100%;justify-content:flex-end}.sort-label select{flex:1}}
+@media(max-width:420px){.ultra-stats{gap:7px}.stat span{font-size:11px}.stat strong{font-size:22px}.library-actions button{flex:1;padding:8px;font-size:12px}}
+
+/* ULTRA V7 MEGA EXPERIENCE */
+.mega-hub{margin:30px 0;padding:clamp(16px,3vw,28px);border:1px solid #ffffff1c;border-radius:26px;background:linear-gradient(135deg,#151d35,#202344 55%,#123c46);box-shadow:0 25px 70px #0005;position:relative;overflow:hidden}
+.mega-heading{display:flex;justify-content:space-between;align-items:center;gap:15px}.mega-heading h2{font-size:clamp(25px,4vw,36px);margin:7px 0}.mega-heading p{margin:0}.mega-orb{font-size:54px;color:#b9a5ff;text-shadow:0 0 35px #9b7bff}
+.rank-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+.rank-card,.mega-card{background:#0c1429a8;border:1px solid #ffffff19;border-radius:17px;padding:16px;min-width:0}
+.rank-card span,.rank-card small{display:block;color:#b8c4e3;font-size:12px}.rank-card strong{display:block;font-size:clamp(20px,3vw,28px);margin:6px 0}.xp-track{height:7px;border-radius:10px;background:#35405d;margin:10px 0;overflow:hidden}.xp-track i{display:block;height:100%;width:0;background:linear-gradient(90deg,#9b7bff,#5dd6c0)}
+.mega-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.mega-card h3{margin:0 0 9px;font-size:17px}.mega-card p,.mega-card small,.mega-card .muted{font-size:12px;line-height:1.55;color:#b8c4e3}.mega-card input:not([type=color]),.mega-card textarea{width:100%;padding:10px;margin:6px 0 9px;border:1px solid #394565;border-radius:10px;background:#0b1224;color:#eef1ff}.mega-card button{margin:4px 4px 4px 0;padding:8px 10px;font-size:12px}.mega-card details{margin-top:8px}.mega-card summary{cursor:pointer;color:#d4caff;font-size:13px}.cover-presets{display:flex;flex-wrap:wrap}.cover-presets button{border-radius:20px}
+.ranking-card{margin-top:12px}.ranking-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}.ranking-item{padding:10px;border-radius:11px;background:#1b2842;font-size:13px;display:flex;justify-content:space-between;gap:8px}
+.reader-tools-extra{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.reader-tools-extra input{flex:1;min-width:180px;padding:10px;border:1px solid #cfc5b5;border-radius:10px}.toc-panel{padding:12px;background:#e9e1d3;border-radius:12px;color:#30291f}.toc-panel button{display:block;margin:5px 0;color:#30291f;background:#fff}
+.review-panel{margin-top:24px;padding:16px;background:#e9e1d3;color:#30291f;border-radius:14px}.review-panel h3{margin-top:0}.review-panel textarea{display:block;width:100%;margin:10px 0;padding:10px;border:1px solid #cfc5b5;border-radius:9px}.review-item{padding:10px 0;border-top:1px solid #d1c7b7;font-size:13px;white-space:pre-wrap}
+.pin-gate{position:fixed;inset:0;z-index:100;background:#070a16f5;display:grid;place-items:center;padding:20px}.pin-gate[hidden]{display:none}.pin-box{width:min(360px,100%);padding:26px;text-align:center;background:#18213a;border:1px solid #ffffff25;border-radius:22px}.pin-box input{width:100%;padding:14px;margin:12px 0;border-radius:10px;text-align:center;letter-spacing:8px}
+.reader-tools-extra+*{scroll-margin-top:20px}
+body.ultra-3d .book,body.ultra-3d .mega-card{transform:perspective(900px) rotateX(1deg);transition:transform .25s,box-shadow .25s}
+body.ultra-3d .book:hover,body.ultra-3d .mega-card:hover{transform:perspective(900px) rotateX(0) translateY(-6px) rotateY(-1deg);box-shadow:0 25px 55px #0008}
+@media(max-width:850px){.mega-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rank-grid{grid-template-columns:1fr 1fr}.rank-card:last-child{grid-column:1/-1}}
+@media(max-width:560px){.mega-grid{grid-template-columns:1fr}.rank-grid{grid-template-columns:1fr}.rank-card:last-child{grid-column:auto}.mega-heading{align-items:flex-start}.mega-orb{font-size:38px}}
+
+/* ULTRA V8 */
+:root{--v8-glow:0 18px 55px #0007}
+.v8-panel{margin:28px 0;padding:22px;border:1px solid #ffffff20;border-radius:24px;background:linear-gradient(135deg,#171d36ee,#182b3bee);box-shadow:var(--v8-glow);position:relative;overflow:hidden}
+.v8-panel:before{content:"";position:absolute;inset:-2px;background:radial-gradient(circle at 90% 0%,#9b7bff30,transparent 34%);pointer-events:none}
+.v8-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;position:relative}
+.v8-head h2{margin:0;font-size:clamp(22px,3vw,30px)}.v8-head p{margin:5px 0;color:var(--muted)}
+.v8-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:17px;position:relative}
+.v8-card{background:#0e1428aa;border:1px solid #ffffff18;border-radius:17px;padding:15px;min-width:0}
+.v8-card h3{margin:0 0 8px;font-size:16px}.v8-card p,.v8-card small{color:var(--muted);line-height:1.55}
+.v8-card input,.v8-card textarea,.v8-card select{width:100%;margin:6px 0 9px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#0b1122;color:var(--text)}
+.v8-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.v8-actions button{font-size:13px;padding:8px 10px}
+.book-tools{flex-wrap:wrap}.book-tools button{font-size:12px;padding:8px 9px}
+.trash-list{display:grid;gap:8px}.trash-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:#111a30}
+.v8-motion .book{transform-style:preserve-3d;transition:transform .35s,box-shadow .35s}.v8-motion .book:hover{transform:perspective(900px) rotateY(-5deg) rotateX(3deg) translateY(-7px);box-shadow:0 25px 50px #0008}.v8-motion .hero,.v8-motion .v8-panel{box-shadow:0 24px 80px #7d65ff22,0 18px 55px #0008}
+.reader.focus-v8{position:fixed;inset:0;z-index:20;margin:0;border-radius:0;overflow:auto}.reader.focus-v8 .reader-content{max-width:900px}
+@media(max-width:700px){.v8-panel{padding:15px}.trash-row{align-items:flex-start;flex-direction:column}.library{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+</style>
+</head>
+<body>
+<header><div class="top">
+  <div class="brand"><div class="logo">文</div><span>ĐỌC TRUYỆN</span></div>
+  <div class="search"><input id="search" type="search" placeholder="Tìm tên truyện, tác giả..." aria-label="Tìm truyện"></div>
+  <div class="top-actions"><button class="ghost" id="themeBtn" title="Đổi giao diện">☼ <span class="label">Giao diện</span></button><button class="primary" id="addBtn">＋ <span class="label">Thêm truyện</span></button></div>
+</div></header>
+<main>
+  <section class="hero">
+    <div class="eyebrow">ULTRA V8 MEGA · 3D IMMERSIVE · OFFLINE FIRST</div>
+    <h1>Thế giới truyện<br>trong tầm tay.</h1>
+    <p>Lưu những câu chuyện yêu thích ngay trên thiết bị. Đọc mọi lúc, kể cả khi không có kết nối Internet. Tiến độ và dấu trang được tự động ghi nhớ trên trình duyệt này.</p>
+    <div class="hero-buttons"><button class="primary" id="browseBtn">Khám phá thư viện →</button><button id="importBtn">⇧ Nhập tệp truyện</button></div>
+  </section>
+  <section class="ultra-stats" aria-label="Thống kê thư viện">
+    <div class="stat"><span>📚 Tổng truyện</span><strong id="statBooks">0</strong></div>
+    <div class="stat"><span>⭐ Yêu thích</span><strong id="statFavs">0</strong></div>
+    <div class="stat"><span>📖 Đã đọc</span><strong id="statRead">0</strong></div>
+    <div class="stat"><span>🎬 Video</span><strong id="statVideos">0</strong></div>
+  </section>
+  <div class="section-head"><div><h2>Thư viện truyện</h2><div class="muted" id="countText" style="font-size:13px;margin-top:4px">Các truyện đã lưu trên thiết bị</div></div><div class="library-actions"><button class="ghost" id="importBackupBtn">⇧ Nhập bản sao</button><button class="ghost" id="exportBtn">⇩ Sao lưu thư viện</button><input id="backupInput" type="file" accept=".json,application/json" hidden></div></div>
+  <div class="filters" style="display:flex;gap:9px;flex-wrap:wrap;margin:0 0 16px">
+    <button class="primary" data-filter="all">Tất cả</button>
+    <button data-filter="adult">🔞 Truyện 18+</button>
+    <button data-filter="favorites">⭐ Yêu thích</button>
+    <label class="sort-label">Sắp xếp <select id="sortBooks"><option value="recent">Mới mở gần đây</option><option value="title">Tên A–Z</option><option value="progress">Tiến độ đọc</option><option value="favorites">Yêu thích trước</option></select></label>
+  </div>
+  <section class="library" id="library"></section>
+  <div class="section-head" id="videoSection"><div><h2>🎬 Thư viện Video Phim</h2><div class="muted" style="font-size:13px;margin-top:4px">Phim dài 1 giờ 30 phút – 3 giờ · Hỗ trợ video lưu trên thiết bị</div></div><button class="primary" id="addVideoBtn">＋ Thêm video</button></div>
+  <section class="library" id="videoLibrary"></section>
+  <section id="videoPlayerPanel" style="display:none;margin-top:22px;background:#101729;border:1px solid var(--line);border-radius:18px;padding:14px">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+      <strong id="videoNowTitle">Đang phát</strong><button id="closeVideoBtn">Đóng video ✕</button>
+    </div>
+    <video id="moviePlayer" controls playsinline preload="metadata" style="width:100%;max-height:72vh;background:#000;border-radius:12px"></video>
+    <div class="muted" id="videoTimeInfo" style="font-size:12px;margin-top:8px">Video được phát trong trình duyệt.</div>
+  </section>
+  <section id="voicePanel" style="margin:26px 0;background:linear-gradient(130deg,#1b2440,#172f3b);border:1px solid var(--line);border-radius:18px;padding:18px">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between">
+      <div><h2 style="margin:0 0 5px">🎙️ Giọng đọc AI</h2><div class="muted" style="font-size:13px">Nghe nội dung truyện bằng giọng đọc có sẵn trong trình duyệt</div></div>
+      <span class="badge" style="font-size:12px;color:#9de6d9">Text-to-Speech</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:15px">
+      <label class="muted" style="font-size:13px">Chọn giọng đọc<select id="voiceSelect" style="display:block;width:100%;margin-top:6px;padding:10px;border-radius:10px;background:#0e1425;color:var(--text);border:1px solid var(--line)"><option value="">Đang tải giọng đọc...</option></select></label>
+      <label class="muted" style="font-size:13px">Tốc độ đọc <span id="rateValue">1.0×</span><input id="voiceRate" type="range" min="0.7" max="1.4" step="0.1" value="1" style="display:block;width:100%;margin-top:12px"></label>
+      <label class="muted" style="font-size:13px">Cao độ <span id="pitchValue">1.0</span><input id="voicePitch" type="range" min="0.7" max="1.4" step="0.1" value="1" style="display:block;width:100%;margin-top:12px"></label>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+      <button class="primary" id="speakBtn">▶ Đọc nội dung truyện</button><button id="pauseSpeakBtn">Ⅱ Tạm dừng</button><button id="resumeSpeakBtn">▶ Tiếp tục</button><button class="ghost" id="stopSpeakBtn">■ Dừng</button>
+    </div>
+    <div class="muted" id="voiceStatus" aria-live="polite" style="font-size:12px;margin-top:10px">Chọn truyện rồi nhấn “Đọc nội dung truyện”. Giọng tiếng Việt tùy thuộc thiết bị/trình duyệt.</div>
+  </section>
+  <section class="mega-hub" id="megaHub">
+    <div class="mega-heading"><div><div class="eyebrow">ULTRA V8 · MEGA READER</div><h2>Trung tâm độc giả</h2><p class="muted">Cấp bậc, thành tích, lịch sử đọc và công cụ cá nhân</p></div><span class="mega-orb">✦</span></div>
+    <div class="rank-grid">
+      <div class="rank-card"><span>👑 Cấp bậc hiện tại</span><strong id="readerRank">Tân Thủ</strong><small id="readerXP">0 XP</small><div class="xp-track"><i id="xpBar"></i></div><small id="xpNext">Còn 100 XP đến cấp tiếp theo</small></div>
+      <div class="rank-card"><span>🏅 Thành tích</span><strong id="achievementCount">0/6</strong><small id="achievementNames">Chưa mở khóa thành tích</small></div>
+      <div class="rank-card"><span>⏱️ Thời gian đọc</span><strong id="readingTime">0 phút</strong><small id="readingStreak">Bắt đầu hành trình hôm nay</small></div>
+    </div>
+    <div class="mega-grid">
+      <article class="mega-card"><h3>☁️ Đồng bộ đa thiết bị</h3><p>Xuất/nhập gói thư viện để chuyển thiết bị. Có thể kết nối máy chủ tương thích nếu bạn có API riêng.</p><button id="syncExport" class="primary">Tạo gói đồng bộ</button><button id="syncImport">Nhập gói đồng bộ</button><input id="syncFile" type="file" accept=".json,application/json" hidden><details><summary>Cấu hình máy chủ riêng (tùy chọn)</summary><input id="syncEndpoint" placeholder="https://may-chu-cua-ban/api/library"><input id="syncToken" type="password" placeholder="Mã truy cập (nếu có)"><button id="syncPush">Đẩy lên máy chủ</button><button id="syncPull">Lấy từ máy chủ</button><small>Máy chủ cần hỗ trợ GET/PUT JSON và CORS. Không có máy chủ mặc định.</small></details><div id="syncStatus" class="muted"></div></article>
+      <article class="mega-card"><h3>🌐 Nhập nội dung từ liên kết</h3><p>Thử tải nội dung trang truyện. Website chặn CORS hoặc yêu cầu đăng nhập có thể không cho phép lấy tự động.</p><input id="fetchStoryUrl" type="url" placeholder="https://website.com/truyen..."><button id="fetchStoryBtn" class="primary">Lấy nội dung trang</button><div id="fetchStatus" class="muted"></div></article>
+      <article class="mega-card"><h3>🎨 Xưởng bìa & giao diện</h3><div class="cover-presets"><button data-cover="aurora">Cực quang</button><button data-cover="royal">Hoàng gia</button><button data-cover="ocean">Đại dương</button><button data-cover="sunset">Hoàng hôn</button></div><label>Màu nhấn <input id="accentPicker" type="color" value="#9b7bff"></label><button id="motionToggle">Bật/tắt hiệu ứng 3D</button><div class="muted">Chọn phong cách bìa áp dụng cho thư viện.</div></article>
+      <article class="mega-card"><h3>🔐 Khóa ứng dụng bằng PIN</h3><p>Khóa giao diện trên thiết bị này. Đây là khóa tiện ích cục bộ, không thay thế bảo mật hệ điều hành.</p><input id="pinInput" inputmode="numeric" maxlength="8" placeholder="PIN 4–8 chữ số"><button id="setPinBtn" class="primary">Đặt / đổi PIN</button><button id="removePinBtn">Tắt khóa PIN</button><div id="pinStatus" class="muted"></div></article>
+      <article class="mega-card"><h3>🎧 Danh sách phát giọng đọc</h3><p>Đọc lần lượt các truyện có nội dung trong thư viện.</p><button id="playlistStart" class="primary">Phát danh sách truyện</button><button id="playlistStop">Dừng danh sách</button><div id="playlistStatus" class="muted">Chưa phát danh sách.</div></article>
+      <article class="mega-card"><h3>📥 Nhập EPUB / PDF</h3><p>EPUB: trích xuất văn bản trong trình duyệt. PDF: cần tải thư viện PDF.js khi có mạng ở lần đầu.</p><input id="ebookInput" type="file" accept=".epub,.pdf,application/epub+zip,application/pdf"><button id="ebookImportBtn" class="primary">Nhập sách điện tử</button><div id="ebookStatus" class="muted"></div></article>
+    </div>
+    <div class="mega-card ranking-card"><h3>🏆 Bảng xếp hạng yêu thích</h3><div id="favoriteRanking" class="ranking-list"></div></div>
+  </section>
+
+  <section class="v8-panel" id="v8Hub">
+    <div class="v8-head"><div><div class="eyebrow">MEGA UPGRADE · VERSION 8</div><h2>✦ Trung tâm Ultra V8</h2><p>Quản lý thư viện, dữ liệu, bộ truyện, nhân vật và công cụ đọc nâng cao.</p></div><span class="mega-orb">V8</span></div>
+    <div class="v8-grid">
+      <article class="v8-card">
+        <h3>🗑️ Thùng rác truyện</h3><p>Truyện xóa được chuyển vào thùng rác để có thể khôi phục trước khi xóa vĩnh viễn.</p>
+        <div class="v8-actions"><button id="showTrashBtn">Mở thùng rác</button><button id="emptyTrashBtn" class="danger">Dọn sạch</button></div>
+        <div id="trashList" class="trash-list" hidden></div>
+      </article>
+      <article class="v8-card">
+        <h3>📚 Bộ truyện & nhân vật</h3><p>Gắn tên bộ truyện, số thứ tự và danh sách nhân vật vào từng truyện.</p>
+        <label>Truyện đang chọn<select id="seriesBookSelect"></select></label>
+        <input id="seriesName" placeholder="Tên bộ truyện / series">
+        <input id="seriesOrder" type="number" min="1" placeholder="Thứ tự tập (ví dụ 1)">
+        <textarea id="characterNames" rows="2" placeholder="Nhân vật, ngăn cách bằng dấu phẩy"></textarea>
+        <button id="saveSeriesBtn" class="primary">Lưu thông tin bộ truyện</button><small id="seriesStatus"></small>
+      </article>
+      <article class="v8-card">
+        <h3>✨ Trợ lý nội dung offline</h3><p>Tóm tắt nhanh và trích xuất tên riêng bằng quy tắc cục bộ; không gửi nội dung ra ngoài.</p>
+        <div class="v8-actions"><button id="localSummaryBtn" class="primary">Tóm tắt truyện đang mở</button><button id="localCharactersBtn">Gợi ý nhân vật</button></div>
+        <div id="localAssistResult" class="muted" style="white-space:pre-wrap;margin-top:9px"></div>
+      </article>
+      <article class="v8-card">
+        <h3>📦 Sao lưu & phiên bản</h3><p>Tạo bản sao JSON đầy đủ, nhập theo kiểu gộp và lưu mốc khôi phục cục bộ.</p>
+        <div class="v8-actions"><button id="v8BackupBtn" class="primary">Sao lưu V8</button><button id="v8RestoreBtn">Khôi phục mốc gần nhất</button></div>
+        <small id="backupStatus"></small>
+      </article>
+      <article class="v8-card">
+        <h3>📤 Xuất truyện</h3><p>Xuất truyện đang mở thành TXT hoặc HTML. PDF có thể tạo bằng chức năng In của trình duyệt.</p>
+        <div class="v8-actions"><button id="exportTxtBtn">Xuất TXT</button><button id="exportHtmlBtn">Xuất HTML</button><button id="exportEpubBtn">Xuất EPUB</button><button id="printStoryBtn">In / PDF</button></div>
+      </article>
+      <article class="v8-card">
+        <h3>🎨 Hiệu ứng 3D Ultra</h3><p>Chuyển động chiều sâu cho thẻ truyện và hiệu ứng ánh sáng nền.</p>
+        <div class="v8-actions"><button id="v8MotionBtn" class="primary">Bật / tắt 3D</button><button id="v8FocusBtn">Tập trung đọc</button></div><small id="v8VisualStatus">Hiệu ứng có thể giảm theo cài đặt chuyển động của thiết bị.</small>
+      </article>
+      <article class="v8-card">
+        <h3>🔐 Quyền riêng tư</h3><p>Dữ liệu truyện được lưu trong trình duyệt. PIN chỉ khóa giao diện, không mã hóa dữ liệu.</p>
+        <div class="v8-actions"><button id="privacyInfoBtn">Xem thông tin dữ liệu</button></div><small id="privacyInfo" hidden>Không có máy chủ mặc định. Bản sao lưu chứa nội dung truyện; hãy giữ tệp ở nơi an toàn. Xóa dữ liệu trình duyệt có thể làm mất thư viện và video.</small>
+      </article>
+    </div>
+  </section>
+
+  <section class="reader" id="reader">
+    <div class="reader-toolbar">
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button id="backBtn">← Thư viện</button><button id="bookmarkBtn">☆ Đánh dấu</button></div>
+      <div style="display:flex;gap:7px;align-items:center"><button id="smallerBtn">A−</button><button id="biggerBtn">A＋</button><button id="focusBtn">☾ Chế độ đọc</button></div>
+    </div>
+    <article class="reader-content">
+      <div class="chapter-label" id="chapterLabel">ĐANG ĐỌC</div><h2 id="readerTitle"></h2>
+      <div class="reader-tools-extra">
+        <input id="insideSearch" type="search" placeholder="Tìm từ khóa trong truyện...">
+        <button id="insideSearchBtn">Tìm trong truyện</button>
+        <button id="showTocBtn">☷ Mục lục chương</button>
+      </div>
+      <div id="tocPanel" class="toc-panel" hidden></div>
+      <div id="insideSearchResult" class="muted" aria-live="polite"></div>
+      <div class="story" id="story"></div>
+      <section class="review-panel">
+        <h3>💬 Đánh giá & bình luận</h3>
+        <label>Chấm điểm truyện <select id="bookRating"><option value="5">★★★★★ · 5/5</option><option value="4">★★★★☆ · 4/5</option><option value="3">★★★☆☆ · 3/5</option><option value="2">★★☆☆☆ · 2/5</option><option value="1">★☆☆☆☆ · 1/5</option></select></label>
+        <textarea id="bookComment" rows="2" placeholder="Viết cảm nhận của bạn..."></textarea>
+        <button id="saveReviewBtn" class="primary">Gửi đánh giá</button><div id="reviewList"></div>
+      </section>
+      <section class="reader-notes">
+        <h3>📝 Ghi chú riêng cho truyện</h3>
+        <textarea id="bookNotes" rows="3" placeholder="Ghi lại nhân vật, tình tiết hoặc cảm nhận của bạn..."></textarea>
+        <button id="saveNotesBtn" class="primary">Lưu ghi chú</button><span id="notesStatus" class="muted">Ghi chú được lưu trên thiết bị.</span>
+      </section>
+      <div class="reader-footer"><button id="prevBtn">← Chương trước</button><button class="primary" id="nextBtn">Chương tiếp →</button></div>
+    </article>
+  </section>
+</main>
+<footer>ĐỌC TRUYỆN ULTRA V8 · Thư viện cá nhân · Lưu trữ cục bộ trên thiết bị</footer>
+<div class="modal" id="modal"><div class="dialog">
+  <h2 id="modalTitle">Thêm truyện mới</h2><p>Nhập nội dung hoặc chọn tệp .txt, .md, .html. Dữ liệu được lưu trong trình duyệt của bạn.</p>
+  <label for="bookTitle" class="muted">Tên truyện</label><input id="bookTitle" placeholder="Ví dụ: Hành trình vạn dặm">
+  <label for="bookAuthor" class="muted">Tác giả (không bắt buộc)</label><input id="bookAuthor" placeholder="Tên tác giả">
+  <label for="bookCategory" class="muted">Thư mục</label>
+  <select id="bookCategory" style="width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#0e1425;color:var(--text);margin:7px 0 13px">
+    <option value="general">Truyện thường</option><option value="adult">Truyện 18+</option>
+  </select>
+  <label for="bookContent" class="muted">Nội dung truyện (có thể để trống nếu dùng liên kết)</label><textarea id="bookContent" placeholder="Dán nội dung truyện vào đây..."></textarea>
+  <label for="bookUrl" class="muted">Liên kết truyện (không bắt buộc)</label><input id="bookUrl" type="url" placeholder="https://example.com/truyen..." style="width:100%;padding:12px;border-radius:11px;border:1px solid var(--line);background:#0e1425;color:var(--text);margin:7px 0 13px">
+  <input id="fileInput" type="file" accept=".txt,.md,.html,.htm,text/plain,text/markdown,text/html">
+  <div class="dialog-actions"><button id="cancelBtn">Hủy</button><button class="primary" id="saveBtn">Lưu truyện</button></div>
+</div></div>
+<div class="modal" id="videoModal"><div class="dialog">
+  <h2>Thêm video phim</h2>
+  <p>Chọn video từ thiết bị để lưu offline trong trình duyệt, hoặc dán đường dẫn video trực tiếp. Nên dùng MP4 (H.264/AAC). Thời lượng mục tiêu: 90–300 phút.</p>
+  <label class="muted" for="videoTitle">Tên phim</label><input id="videoTitle" placeholder="Tên phim">
+  <label class="muted" for="videoFile">Chọn video từ thiết bị</label><input id="videoFile" type="file" accept="video/mp4,video/webm,video/ogg,.m4v">
+  <label class="muted" for="videoUrl">Hoặc đường dẫn video trực tiếp</label><input id="videoUrl" type="url" placeholder="https://.../phim.mp4">
+  <div class="dialog-actions"><button id="cancelVideoBtn">Hủy</button><button class="primary" id="saveVideoBtn">Thêm vào thư viện</button></div>
+</div></div>
+<div id="pinGate" class="pin-gate" hidden><div class="pin-box"><div class="logo">文</div><h2>ĐỌC TRUYỆN ĐANG KHÓA</h2><p>Nhập PIN để tiếp tục</p><input id="unlockPin" inputmode="numeric" maxlength="8" placeholder="••••"><button id="unlockBtn" class="primary">Mở khóa</button><div id="unlockStatus"></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const KEY='doc-truyen-offline-v1';
+const samples=[
+];
+let books=loadBooks(),currentId=null,fontSize=19,chapter=0,activeFilter='all',adultUnlocked=false;
+// ULTRA V7 profile data: local-first; does not replace existing book storage.
+const PROFILE_KEY='doc-truyen-ultra-v7-profile';
+let profile=(()=>{try{return JSON.parse(localStorage.getItem(PROFILE_KEY))||{xp:0,minutes:0,days:{},reviews:{}}}catch(e){return {xp:0,minutes:0,days:{},reviews:{}}}})();
+function saveProfile(){try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profile))}catch(e){}}
+function addXP(amount){profile.xp=(profile.xp||0)+amount;saveProfile();renderProfile()}
+function renderProfile(){
+ const xp=profile.xp||0,levels=[['Tân Thủ',0],['Tập Sự',100],['Ham Đọc',300],['Cao Thủ',700],['Đại Sư',1500],['Thánh Thư',3000]];
+ let idx=0;for(let i=0;i<levels.length;i++)if(xp>=levels[i][1])idx=i;
+ const next=levels[idx+1],base=levels[idx][1],pct=next?Math.min(100,(xp-base)/(next[1]-base)*100):100;
+ document.getElementById('readerRank').textContent=levels[idx][0];document.getElementById('readerXP').textContent=xp+' XP';
+ document.getElementById('xpBar').style.width=pct+'%';document.getElementById('xpNext').textContent=next?`Còn ${next[1]-xp} XP đến ${next[0]}`:'Đã đạt cấp cao nhất';
+ const achievements=[['first','Mở trang truyện',books.length>0],['reader','Đọc xong một truyện',books.some(b=>(b.progress||0)>=100)],['collector','Sưu tầm 5 truyện',books.length>=5],['favorite','Có truyện yêu thích',books.some(b=>b.favorite)],['review','Viết đánh giá',Object.keys(profile.reviews||{}).length>0],['marathon','Đọc đủ 60 phút',(profile.minutes||0)>=60]];
+ const unlocked=achievements.filter(a=>a[2]);document.getElementById('achievementCount').textContent=unlocked.length+'/'+achievements.length;document.getElementById('achievementNames').textContent=unlocked.map(a=>'🏅 '+a[1]).join(' · ')||'Hãy đọc để mở khóa!';
+ document.getElementById('readingTime').textContent=(profile.minutes||0)+' phút';document.getElementById('readingStreak').textContent=`${Object.keys(profile.days||{}).length} ngày có hoạt động đọc`;
+ const rank=[...books].sort((a,b)=>(Number(b.favorite||false)*100+(b.rating||0))-(Number(a.favorite||false)*100+(a.rating||0))).slice(0,8);
+ document.getElementById('favoriteRanking').innerHTML=rank.length?rank.map((b,i)=>`<div class="ranking-item"><span>${i+1}. ${escapeHTML(b.title)}</span><b>${b.favorite?'★ ':''}${b.rating?b.rating+'/5':'☆'}</b></div>`).join(''):'<span class="muted">Chưa có truyện để xếp hạng.</span>';
+}
+function escapeHTML(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+let readStartedAt=null,readTimer=null,playlistQueue=[],playlistPos=0;
+
+function loadBooks(){try{const saved=JSON.parse(localStorage.getItem(KEY));const list=Array.isArray(saved)?saved:samples;const removedIds=new Set(['sample1','sample2','sample3','sample4']);const filtered=list.filter(book=>!removedIds.has(book.id));if(filtered.length!==list.length)localStorage.setItem(KEY,JSON.stringify(filtered));return filtered}catch(e){return samples}}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(books))}catch(e){toast('Bộ nhớ trình duyệt đã đầy. Hãy xuất bản sao và xóa bớt truyện.');}}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2400)}
+function render(){
+ const q=document.getElementById('search').value.toLocaleLowerCase('vi');
+ const list=document.getElementById('library');list.innerHTML='';
+ let filtered=books.filter(b=>{
+   const categoryOK=activeFilter==='all'||(activeFilter==='adult'?b.category==='adult':activeFilter==='favorites'?!!b.favorite:b.category!=='adult');
+   return categoryOK&&(b.title+' '+(b.author||'')).toLocaleLowerCase('vi').includes(q);
+ });
+ const sort=document.getElementById('sortBooks')?.value||'recent';
+ filtered.sort((a,b)=>sort==='title'?a.title.localeCompare(b.title,'vi'):sort==='progress'?(b.progress||0)-(a.progress||0):sort==='favorites'?Number(!!b.favorite)-Number(!!a.favorite):(b.lastOpened||0)-(a.lastOpened||0));
+ document.getElementById('countText').textContent=`${books.length} truyện đã lưu trên thiết bị · ${filtered.length} kết quả`;
+ document.getElementById('statBooks').textContent=books.length;
+ document.getElementById('statFavs').textContent=books.filter(b=>b.favorite).length;
+ document.getElementById('statRead').textContent=books.filter(b=>(b.progress||0)>=100).length;
+ document.getElementById('statVideos').textContent=typeof videos!=='undefined'?videos.length:0;
+ if(!filtered.length){list.innerHTML='<div class="empty">Chưa tìm thấy truyện phù hợp. Hãy thêm truyện hoặc nhập tệp của bạn.</div>';return}
+ filtered.forEach(b=>{
+   const card=document.createElement('div');card.className='book';
+   const cover=document.createElement('div');cover.className='cover';cover.textContent=b.title;
+   const info=document.createElement('div');info.className='book-info';
+   const h=document.createElement('h3');h.textContent=b.title;
+   const p=document.createElement('p');p.textContent=(b.category==='adult'?'🔞 18+ · ':'')+(b.author||'Chưa rõ tác giả')+(b.url?' · 🔗 Có liên kết':' · '+(b.content||'').length.toLocaleString('vi')+' ký tự');
+   const bar=document.createElement('div');bar.className='progress';const span=document.createElement('span');span.style.width=(b.progress||0)+'%';bar.append(span);
+   const tools=document.createElement('div');tools.className='book-tools';
+   const fav=document.createElement('button');fav.className='favorite-btn'+(b.favorite?' active':'');fav.textContent=b.favorite?'★ Đã thích':'☆ Yêu thích';
+   fav.onclick=e=>{e.stopPropagation();b.favorite=!b.favorite;persist();render()};
+   const open=document.createElement('button');open.className='primary';open.textContent=b.url&&!b.content?'Mở liên kết':'Đọc truyện';
+   open.onclick=e=>{e.stopPropagation();if(b.url&&!b.content)window.open(b.url,'_blank','noopener,noreferrer');else openBook(b.id)};
+   const editMeta=document.createElement('button');editMeta.textContent='✎ Bộ truyện';editMeta.onclick=e=>{e.stopPropagation();document.getElementById('seriesBookSelect').value=b.id;loadSeriesEditor();document.getElementById('v8Hub').scrollIntoView({behavior:'smooth'})};
+   const del=document.createElement('button');del.className='danger';del.textContent='🗑';del.title='Chuyển vào thùng rác';del.onclick=e=>{e.stopPropagation();if(!confirm('Chuyển truyện này vào thùng rác?'))return;v8TrashBook(b.id)};
+   tools.append(fav,open,editMeta,del);info.append(h,p,bar,tools);card.append(cover,info);
+   card.addEventListener('click',()=>{if(b.url&&!b.content)window.open(b.url,'_blank','noopener,noreferrer');else openBook(b.id)});
+   list.append(card);
+ });
+}
+function openBook(id){currentId=id;chapter=0;const b=books.find(x=>x.id===id);if(!b)return;b.lastOpened=Date.now();profile.days=profile.days||{};profile.days[new Date().toISOString().slice(0,10)]=true;addXP(5);readStartedAt=Date.now();if(readTimer)clearInterval(readTimer);readTimer=setInterval(()=>{if(readStartedAt){profile.minutes=(profile.minutes||0)+1;readStartedAt=Date.now();saveProfile();renderProfile();}},60000);document.getElementById('reader').classList.add('active');document.getElementById('readerTitle').textContent=b.title;document.getElementById('bookNotes').value=b.notes||'';document.getElementById('notesStatus').textContent='Ghi chú được lưu trên thiết bị.';document.getElementById('library').scrollIntoView({behavior:'smooth',block:'start'});renderChapter();document.getElementById('reader').scrollIntoView({behavior:'smooth',block:'start'})}
+function chunks(b){return (b.content||'').split(/(?=Chương\\s+\\d+\\s*[:：.-]?)/i).filter(x=>x.trim())}
+function renderChapter(){const b=books.find(x=>x.id===currentId);if(!b)return;const parts=chunks(b);chapter=Math.max(0,Math.min(chapter,parts.length-1));const text=parts[chapter]||b.content;document.getElementById('chapterLabel').textContent=`CHƯƠNG ${chapter+1} / ${Math.max(parts.length,1)}`;document.getElementById('story').textContent=text;
+ const toc=document.getElementById('tocPanel');toc.innerHTML='';parts.forEach((part,i)=>{const line=part.trim().split(/\n/)[0].slice(0,90)||('Chương '+(i+1));const btn=document.createElement('button');btn.textContent=(i+1)+'. '+line;btn.onclick=()=>{chapter=i;renderChapter()};toc.append(btn)});
+ const rev=profile.reviews?.[currentId]||[];document.getElementById('reviewList').innerHTML=rev.map(r=>`<div class="review-item">⭐ ${r.rating}/5 · ${escapeHTML(r.date)}<br>${escapeHTML(r.comment)}</div>`).join('')||'<div class="review-item">Chưa có đánh giá.</div>';
+document.getElementById('readerTitle').textContent=b.title;document.getElementById('prevBtn').disabled=chapter===0;document.getElementById('nextBtn').disabled=chapter>=parts.length-1;document.getElementById('bookmarkBtn').textContent=b.bookmark===chapter?'★ Đã đánh dấu':'☆ Đánh dấu';b.progress=Math.round((chapter+1)/Math.max(parts.length,1)*100);persist();render()}
+document.getElementById('addBtn').onclick=()=>{document.getElementById('modal').classList.add('open');document.getElementById('bookTitle').value='';document.getElementById('bookAuthor').value='';document.getElementById('bookContent').value='';document.getElementById('bookUrl').value='';document.getElementById('bookCategory').value='general';document.getElementById('fileInput').value=''};
+document.getElementById('importBtn').onclick=()=>document.getElementById('addBtn').click();
+document.getElementById('cancelBtn').onclick=()=>document.getElementById('modal').classList.remove('open');
+document.getElementById('fileInput').onchange=async e=>{const f=e.target.files[0];if(!f)return;const txt=await f.text();document.getElementById('bookContent').value=txt;if(!document.getElementById('bookTitle').value)document.getElementById('bookTitle').value=f.name.replace(/\\.[^.]+$/,'')};
+document.getElementById('saveBtn').onclick=()=>{const title=document.getElementById('bookTitle').value.trim(),content=document.getElementById('bookContent').value.trim(),url=document.getElementById('bookUrl').value.trim();if(!title||(!content&&!url)){toast('Vui lòng nhập tên truyện và nội dung hoặc liên kết.');return}if(url&&!/^https?:\/\//i.test(url)){toast('Liên kết phải bắt đầu bằng http:// hoặc https://');return}const category=document.getElementById('bookCategory').value;if(category==='adult'&&!adultUnlocked){toast('Hãy xác nhận bạn đủ 18 tuổi để thêm truyện vào thư mục này.');return}books.unshift({id:'book-'+Date.now(),title,author:document.getElementById('bookAuthor').value.trim(),content,url,category,progress:0});persist();render();document.getElementById('modal').classList.remove('open');toast(url&&!content?'Đã thêm liên kết truyện!':'Đã lưu truyện vào thiết bị!')};
+document.getElementById('search').oninput=render;
+
+// V7: visual personalization and 3D motion.
+const coverThemes={aurora:['#244c78','#5a3c92'],royal:['#8a5b18','#4c236f'],ocean:['#087f8c','#183c73'],sunset:['#bd543c','#633c78']};
+document.querySelectorAll('[data-cover]').forEach(btn=>btn.onclick=()=>{const c=coverThemes[btn.dataset.cover];document.documentElement.style.setProperty('--cover-a',c[0]);document.documentElement.style.setProperty('--cover-b',c[1]);document.body.dataset.cover=btn.dataset.cover;localStorage.setItem('doc-truyen-cover',btn.dataset.cover);toast('Đã đổi phong cách bìa')});
+document.getElementById('accentPicker').oninput=e=>{document.documentElement.style.setProperty('--accent',e.target.value);localStorage.setItem('doc-truyen-accent',e.target.value)};
+document.getElementById('motionToggle').onclick=()=>{document.body.classList.toggle('ultra-3d');localStorage.setItem('doc-truyen-3d',document.body.classList.contains('ultra-3d')?'1':'0')};
+try{const c=localStorage.getItem('doc-truyen-cover');if(c&&coverThemes[c]){document.documentElement.style.setProperty('--cover-a',coverThemes[c][0]);document.documentElement.style.setProperty('--cover-b',coverThemes[c][1])}const a=localStorage.getItem('doc-truyen-accent');if(a)document.documentElement.style.setProperty('--accent',a);if(localStorage.getItem('doc-truyen-3d')==='1')document.body.classList.add('ultra-3d')}catch(e){}
+
+document.getElementById('sortBooks').onchange=render;
+document.getElementById('saveNotesBtn').onclick=()=>{const b=books.find(x=>x.id===currentId);if(!b)return;b.notes=document.getElementById('bookNotes').value;persist();document.getElementById('notesStatus').textContent='✓ Đã lưu ghi chú';toast('Đã lưu ghi chú cho truyện')};
+
+document.getElementById('showTocBtn').onclick=()=>{const t=document.getElementById('tocPanel');t.hidden=!t.hidden};
+document.getElementById('insideSearchBtn').onclick=()=>{const q=document.getElementById('insideSearch').value.trim().toLocaleLowerCase('vi'),b=books.find(x=>x.id===currentId);if(!b||!q)return;const at=(b.content||'').toLocaleLowerCase('vi').indexOf(q);document.getElementById('insideSearchResult').textContent=at<0?'Không tìm thấy từ khóa.':`Tìm thấy tại vị trí ký tự ${at+1} trong toàn truyện.`;if(at>=0){const parts=chunks(b);let offset=0;for(let i=0;i<parts.length;i++){if(at<offset+parts[i].length){chapter=i;renderChapter();break}offset+=parts[i].length}}};
+document.getElementById('saveReviewBtn').onclick=()=>{if(!currentId)return;profile.reviews=profile.reviews||{};profile.reviews[currentId]=profile.reviews[currentId]||[];const rating=Number(document.getElementById('bookRating').value),comment=document.getElementById('bookComment').value.trim();if(!comment){toast('Hãy viết cảm nhận trước khi gửi.');return}profile.reviews[currentId].unshift({rating,comment,date:new Date().toLocaleDateString('vi-VN')});const b=books.find(x=>x.id===currentId);b.rating=rating;saveProfile();document.getElementById('bookComment').value='';renderChapter();renderProfile();addXP(10);toast('Đã lưu đánh giá trên thiết bị')};
+
+document.getElementById('browseBtn').onclick=()=>document.getElementById('library').scrollIntoView({behavior:'smooth'});
+document.getElementById('backBtn').onclick=()=>document.getElementById('reader').classList.remove('active');
+document.getElementById('prevBtn').onclick=()=>{chapter--;renderChapter()};
+document.getElementById('nextBtn').onclick=()=>{chapter++;renderChapter()};
+document.getElementById('bookmarkBtn').onclick=()=>{const b=books.find(x=>x.id===currentId);b.bookmark=b.bookmark===chapter?null:chapter;persist();renderChapter();toast(b.bookmark===null?'Đã bỏ dấu trang':'Đã lưu dấu trang')};
+document.getElementById('smallerBtn').onclick=()=>{fontSize=Math.max(14,fontSize-1);document.documentElement.style.setProperty('--reader-size',fontSize+'px')};
+document.getElementById('biggerBtn').onclick=()=>{fontSize=Math.min(30,fontSize+1);document.documentElement.style.setProperty('--reader-size',fontSize+'px')};
+document.getElementById('focusBtn').onclick=()=>document.querySelector('.reader').classList.toggle('focus');
+document.getElementById('themeBtn').onclick=()=>document.body.classList.toggle('light');
+document.getElementById('importBackupBtn').onclick=()=>document.getElementById('backupInput').click();
+document.getElementById('backupInput').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!Array.isArray(data))throw new Error('invalid');let added=0;data.forEach(item=>{if(item&&item.title&&!books.some(b=>b.id===item.id||(b.title===item.title&&b.author===item.author))){books.push({...item,id:item.id||'restored-'+Date.now()+'-'+added});added++}});persist();render();toast(`Đã nhập ${added} truyện, không ghi đè thư viện cũ`)}catch(err){toast('Tệp sao lưu không hợp lệ.')}e.target.value=''};
+document.getElementById('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(books,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='thu-vien-doc-truyen.json';a.click();URL.revokeObjectURL(a.href);toast('Đã xuất bản sao thư viện')};
+document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{const next=btn.dataset.filter;if(next==='adult'&&!adultUnlocked){if(!confirm('Thư mục này dành riêng cho người từ đủ 18 tuổi. Bạn xác nhận mình đã đủ 18 tuổi?'))return;adultUnlocked=true}activeFilter=next;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('primary',x===btn));render()}));
+
+
+// AI VOICE: uses the browser's built-in SpeechSynthesis voices; availability varies by device.
+let availableVoices=[],speechChunks=[],speechChunkIndex=0,isSpeaking=false;
+function loadSpeechVoices(){if(!('speechSynthesis' in window)){document.getElementById('voiceStatus').textContent='Trình duyệt này chưa hỗ trợ đọc văn bản.';return}availableVoices=speechSynthesis.getVoices();const sel=document.getElementById('voiceSelect');sel.innerHTML='';const vi=availableVoices.filter(v=>/^vi(-|$)/i.test(v.lang));const rest=availableVoices.filter(v=>!/^vi(-|$)/i.test(v.lang));[...vi,...rest].forEach(v=>{const o=document.createElement('option');o.value=v.voiceURI;o.textContent=`${v.name} (${v.lang})${v.default?' · Mặc định':''}`;sel.append(o)});if(!availableVoices.length){const o=document.createElement('option');o.value='';o.textContent='Chưa có giọng đọc trên thiết bị';sel.append(o)}else if(vi.length){sel.value=vi[0].voiceURI}}
+if('speechSynthesis' in window){loadSpeechVoices();speechSynthesis.onvoiceschanged=loadSpeechVoices}
+function splitSpeech(text,max=220){const parts=[];let remaining=text.trim();while(remaining.length>max){let cut=Math.max(remaining.lastIndexOf('. ',max),remaining.lastIndexOf('! ',max),remaining.lastIndexOf('? ',max),remaining.lastIndexOf('\n',max),remaining.lastIndexOf(', ',max));if(cut<80)cut=max;parts.push(remaining.slice(0,cut+1));remaining=remaining.slice(cut+1).trim()}if(remaining)parts.push(remaining);return parts}
+function speakCurrentText(){if(!('speechSynthesis' in window)){toast('Thiết bị chưa hỗ trợ giọng đọc.');return}let text='';if(currentId){const b=books.find(x=>x.id===currentId);if(b)text=(chunks(b)[chapter]||b.content||'')}else{text=document.getElementById('bookContent').value}if(!text.trim()){toast('Hãy mở một truyện trước khi nghe đọc.');return}speechSynthesis.cancel();speechChunks=splitSpeech(text);speechChunkIndex=0;isSpeaking=true;speakNextChunk()}
+function speakNextChunk(){if(!isSpeaking||speechChunkIndex>=speechChunks.length){isSpeaking=false;document.getElementById('voiceStatus').textContent='Đã đọc xong nội dung.';return}const u=new SpeechSynthesisUtterance(speechChunks[speechChunkIndex++]);const voice=availableVoices.find(v=>v.voiceURI===document.getElementById('voiceSelect').value);if(voice){u.voice=voice;u.lang=voice.lang}else{u.lang='vi-VN'}u.rate=Number(document.getElementById('voiceRate').value);u.pitch=Number(document.getElementById('voicePitch').value);u.onend=speakNextChunk;u.onerror=()=>{isSpeaking=false;document.getElementById('voiceStatus').textContent='Không phát được giọng đọc đã chọn.'};document.getElementById('voiceStatus').textContent=`Đang đọc đoạn ${speechChunkIndex}/${speechChunks.length}…`;speechSynthesis.speak(u)}
+document.getElementById('speakBtn').onclick=speakCurrentText;
+
+document.getElementById('playlistStart').onclick=()=>{playlistQueue=books.filter(b=>b.content&&b.content.trim());playlistPos=0;if(!playlistQueue.length){toast('Thư viện chưa có truyện có nội dung.');return}playPlaylistItem()};
+function playPlaylistItem(){if(playlistPos>=playlistQueue.length){document.getElementById('playlistStatus').textContent='Đã đọc hết danh sách.';isSpeaking=false;return}const b=playlistQueue[playlistPos];currentId=b.id;chapter=0;const txt=b.content||'';speechSynthesis.cancel();speechChunks=splitSpeech(txt,220);speechChunkIndex=0;isSpeaking=true;document.getElementById('playlistStatus').textContent=`Đang đọc ${playlistPos+1}/${playlistQueue.length}: ${b.title}`;speakPlaylistChunk()}
+function speakPlaylistChunk(){if(!isSpeaking)return;if(speechChunkIndex>=speechChunks.length){playlistPos++;playPlaylistItem();return}const u=new SpeechSynthesisUtterance(speechChunks[speechChunkIndex++]);const voice=availableVoices.find(v=>v.voiceURI===document.getElementById('voiceSelect').value);if(voice){u.voice=voice;u.lang=voice.lang}else u.lang='vi-VN';u.rate=Number(document.getElementById('voiceRate').value);u.onend=speakPlaylistChunk;u.onerror=()=>{isSpeaking=false;document.getElementById('playlistStatus').textContent='Giọng đọc gặp lỗi.'};speechSynthesis.speak(u)}
+document.getElementById('playlistStop').onclick=()=>{isSpeaking=false;speechSynthesis.cancel();document.getElementById('playlistStatus').textContent='Đã dừng danh sách.'};
+
+document.getElementById('pauseSpeakBtn').onclick=()=>{if('speechSynthesis'in window)speechSynthesis.pause();document.getElementById('voiceStatus').textContent='Đã tạm dừng giọng đọc.'};
+document.getElementById('resumeSpeakBtn').onclick=()=>{if('speechSynthesis'in window)speechSynthesis.resume();document.getElementById('voiceStatus').textContent='Đang tiếp tục đọc…'};
+document.getElementById('stopSpeakBtn').onclick=()=>{if('speechSynthesis'in window)speechSynthesis.cancel();isSpeaking=false;document.getElementById('voiceStatus').textContent='Đã dừng giọng đọc.'};
+document.getElementById('voiceRate').oninput=e=>document.getElementById('rateValue').textContent=Number(e.target.value).toFixed(1)+'×';
+document.getElementById('voicePitch').oninput=e=>document.getElementById('pitchValue').textContent=Number(e.target.value).toFixed(1);
+// VIDEO LIBRARY: one-file implementation; files are stored in IndexedDB for offline reuse.
+const VIDEO_META_KEY='doc-truyen-videos-v1';
+let videos=readVideoMeta(),activeVideoObjectUrl=null;
+function readVideoMeta(){try{return JSON.parse(localStorage.getItem(VIDEO_META_KEY))||[]}catch(e){return []}}
+function saveVideoMeta(){try{localStorage.setItem(VIDEO_META_KEY,JSON.stringify(videos))}catch(e){toast('Không thể lưu danh sách video trong trình duyệt.')}}
+function openVideoDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open('DocTruyenVideoDB',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('videos'))req.result.createObjectStore('videos',{keyPath:'id'})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
+async function putVideoBlob(id,blob){const db=await openVideoDB();return new Promise((resolve,reject)=>{const tx=db.transaction('videos','readwrite');tx.objectStore('videos').put({id,blob});tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)})}
+async function getVideoBlob(id){const db=await openVideoDB();return new Promise((resolve,reject)=>{const req=db.transaction('videos','readonly').objectStore('videos').get(id);req.onsuccess=()=>resolve(req.result?.blob||null);req.onerror=()=>reject(req.error)})}
+async function deleteVideoBlob(id){const db=await openVideoDB();return new Promise(resolve=>{const tx=db.transaction('videos','readwrite');tx.objectStore('videos').delete(id);tx.oncomplete=resolve;tx.onerror=resolve})}
+function durationLabel(seconds){if(!Number.isFinite(seconds))return 'Chưa xác định thời lượng';const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60);return h?`${h} giờ ${m} phút`:`${m} phút`}
+function renderVideos(){const wrap=document.getElementById('videoLibrary');wrap.innerHTML='';if(!videos.length){wrap.innerHTML='<div class="empty">Chưa có video. Nhấn “Thêm video” để chọn phim từ thiết bị hoặc nhập URL.</div>';return}videos.forEach(v=>{const card=document.createElement('div');card.className='video-card';const thumb=document.createElement('div');thumb.className='video-thumb';thumb.textContent='▶';const info=document.createElement('div');info.className='book-info';const h=document.createElement('h3');h.textContent=v.title;const p=document.createElement('p');p.textContent=(v.duration?durationLabel(v.duration)+' · ':'')+(v.kind==='file'?'Lưu offline trên thiết bị':'Video URL');const play=document.createElement('button');play.className='primary';play.textContent='▶ Xem phim';play.onclick=()=>playVideo(v.id);const del=document.createElement('button');del.className='ghost danger';del.textContent='Xóa';del.onclick=async()=>{if(!confirm('Xóa video này khỏi thư viện?'))return;videos=videos.filter(x=>x.id!==v.id);if(v.kind==='file')await deleteVideoBlob(v.id);saveVideoMeta();renderVideos();toast('Đã xóa video')};info.append(h,p,play,del);card.append(thumb,info);wrap.append(card)})}
+async function playVideo(id){const v=videos.find(x=>x.id===id);if(!v)return;const player=document.getElementById('moviePlayer');if(activeVideoObjectUrl){URL.revokeObjectURL(activeVideoObjectUrl);activeVideoObjectUrl=null}let src=v.url;if(v.kind==='file'){try{const blob=await getVideoBlob(id);if(!blob){toast('Không tìm thấy dữ liệu video offline. Hãy thêm lại tệp.');return}activeVideoObjectUrl=URL.createObjectURL(blob);src=activeVideoObjectUrl}catch(e){toast('Không thể mở video trong bộ nhớ thiết bị.');return}}player.src=src;document.getElementById('videoNowTitle').textContent=v.title;document.getElementById('videoPlayerPanel').style.display='block';document.getElementById('videoSection').scrollIntoView({behavior:'smooth'});player.play().catch(()=>{});}
+document.getElementById('addVideoBtn').onclick=()=>{document.getElementById('videoModal').classList.add('open');document.getElementById('videoTitle').value='';document.getElementById('videoFile').value='';document.getElementById('videoUrl').value=''};
+document.getElementById('cancelVideoBtn').onclick=()=>document.getElementById('videoModal').classList.remove('open');
+document.getElementById('saveVideoBtn').onclick=async()=>{const file=document.getElementById('videoFile').files[0],url=document.getElementById('videoUrl').value.trim(),title=document.getElementById('videoTitle').value.trim()||(file?file.name:'Video phim');if(!file&&!url){toast('Hãy chọn tệp video hoặc nhập URL.');return}if(url&&!/^https?:\/\//i.test(url)){toast('URL video phải bắt đầu bằng http:// hoặc https://');return}const id='movie-'+Date.now();let duration=null;if(file){const temp=URL.createObjectURL(file);duration=await new Promise(resolve=>{const v=document.createElement('video');v.preload='metadata';v.onloadedmetadata=()=>{const d=v.duration;URL.revokeObjectURL(temp);resolve(Number.isFinite(d)?d:null)};v.onerror=()=>{URL.revokeObjectURL(temp);resolve(null)};v.src=temp});try{await putVideoBlob(id,file)}catch(e){toast('Không lưu được video. Có thể thiết bị đã hết dung lượng hoặc trình duyệt giới hạn bộ nhớ.');return}videos.unshift({id,title,kind:'file',duration});}else{videos.unshift({id,title,kind:'url',url,duration:null})}saveVideoMeta();renderVideos();document.getElementById('videoModal').classList.remove('open');toast('Đã thêm video vào thư viện')};
+document.getElementById('closeVideoBtn').onclick=()=>{const player=document.getElementById('moviePlayer');player.pause();player.removeAttribute('src');player.load();if(activeVideoObjectUrl){URL.revokeObjectURL(activeVideoObjectUrl);activeVideoObjectUrl=null}document.getElementById('videoPlayerPanel').style.display='none'};
+document.getElementById('moviePlayer').addEventListener('loadedmetadata',()=>{const d=document.getElementById('moviePlayer').duration;document.getElementById('videoTimeInfo').textContent='Thời lượng: '+durationLabel(d)+(d>=5400&&d<=18000?' · Nằm trong khoảng 1 giờ 30 phút – 5 giờ':' · Ngoài khoảng thời lượng mục tiêu')});
+renderVideos();
+
+// V7: portable sync package. True cloud sync requires a compatible user-owned API.
+function makeSyncPackage(){return {app:'DocTruyenUltra',version:8,createdAt:new Date().toISOString(),books,trash:typeof v8Trash!=='undefined'?v8Trash:[],profile,videos}}
+function downloadJSON(data,name){const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+document.getElementById('syncExport').onclick=()=>downloadJSON(makeSyncPackage(),'doc-truyen-sync.json');
+document.getElementById('syncImport').onclick=()=>document.getElementById('syncFile').click();
+document.getElementById('syncFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.books))throw 0;const map=new Map(books.map(b=>[b.id,b]));d.books.forEach(b=>map.set(b.id||'import-'+Math.random(),b));books=[...map.values()];if(d.profile)profile={...profile,...d.profile};persist();saveProfile();render();renderProfile();document.getElementById('syncStatus').textContent='Đã gộp gói đồng bộ vào thư viện.'}catch(e){document.getElementById('syncStatus').textContent='Gói đồng bộ không hợp lệ.'}e.target.value=''};
+async function remoteSync(method){const endpoint=document.getElementById('syncEndpoint').value.trim(),token=document.getElementById('syncToken').value.trim();if(!/^https?:\/\//i.test(endpoint)){document.getElementById('syncStatus').textContent='Nhập URL máy chủ HTTPS/HTTP hợp lệ.';return}try{const headers={'Content-Type':'application/json'};if(token)headers.Authorization='Bearer '+token;const res=await fetch(endpoint,{method,headers,...(method==='PUT'?{body:JSON.stringify(makeSyncPackage())}:{})});if(!res.ok)throw Error('HTTP '+res.status);if(method==='GET'){const d=await res.json();if(!Array.isArray(d.books))throw Error('Dữ liệu máy chủ không hợp lệ');const m=new Map(books.map(b=>[b.id,b]));d.books.forEach(b=>m.set(b.id,b));books=[...m.values()];if(d.profile)profile={...profile,...d.profile};persist();saveProfile();render();renderProfile()}document.getElementById('syncStatus').textContent='Đồng bộ máy chủ thành công.'}catch(e){document.getElementById('syncStatus').textContent='Không kết nối được: '+e.message+'. Kiểm tra API/CORS.'}}
+document.getElementById('syncPush').onclick=()=>remoteSync('PUT');document.getElementById('syncPull').onclick=()=>remoteSync('GET');
+// PIN gate is a casual local screen lock, not encryption of stored content.
+function pinHash(v){let h=2166136261;for(let i=0;i<v.length;i++){h^=v.charCodeAt(i);h=Math.imul(h,16777619)}return 'p'+(h>>>0).toString(16)}
+document.getElementById('setPinBtn').onclick=()=>{const pin=document.getElementById('pinInput').value;if(!/^\d{4,8}$/.test(pin)){document.getElementById('pinStatus').textContent='PIN cần từ 4 đến 8 chữ số.';return}localStorage.setItem('doc-truyen-pin',pinHash(pin));document.getElementById('pinStatus').textContent='Đã đặt PIN cho thiết bị này.';document.getElementById('pinInput').value='';toast('Đã bật khóa PIN')};
+document.getElementById('removePinBtn').onclick=()=>{localStorage.removeItem('doc-truyen-pin');document.getElementById('pinStatus').textContent='Đã tắt khóa PIN.'};
+document.getElementById('unlockBtn').onclick=()=>{const saved=localStorage.getItem('doc-truyen-pin');if(saved&&pinHash(document.getElementById('unlockPin').value)===saved){document.getElementById('pinGate').hidden=true;document.getElementById('unlockStatus').textContent='';}else document.getElementById('unlockStatus').textContent='PIN không đúng.'};
+document.getElementById('unlockPin').onkeydown=e=>{if(e.key==='Enter')document.getElementById('unlockBtn').click()};
+if(localStorage.getItem('doc-truyen-pin'))document.getElementById('pinGate').hidden=false;
+// Fetch link: best-effort only; browser CORS and publisher access rules apply.
+document.getElementById('fetchStoryBtn').onclick=async()=>{const url=document.getElementById('fetchStoryUrl').value.trim(),status=document.getElementById('fetchStatus');if(!/^https?:\/\//i.test(url)){status.textContent='Nhập URL http(s) hợp lệ.';return}status.textContent='Đang thử tải trang...';try{const r=await fetch(url);if(!r.ok)throw Error('HTTP '+r.status);const html=await r.text(),doc=new DOMParser().parseFromString(html,'text/html');doc.querySelectorAll('script,style,nav,header,footer,form,iframe').forEach(x=>x.remove());const article=doc.querySelector('article,main,[class*=content],[id*=content]')||doc.body;const content=(article.innerText||article.textContent||'').trim();if(content.length<100)throw Error('Không tìm thấy nội dung đủ dài');document.getElementById('bookTitle').value=doc.title||url;document.getElementById('bookContent').value=content;document.getElementById('bookUrl').value=url;document.getElementById('modal').classList.add('open');status.textContent='Đã lấy nội dung. Kiểm tra rồi bấm Lưu truyện.'}catch(e){status.textContent='Không lấy được tự động ('+e.message+'). Website có thể chặn CORS/đăng nhập; hãy dùng URL hoặc dán nội dung.'}};
+
+async function unzipTextEntries(buffer){const bytes=new Uint8Array(buffer),view=new DataView(buffer),files={};for(let p=0;p+30<bytes.length;){if(view.getUint32(p,true)!==0x04034b50){p++;continue}const method=view.getUint16(p+8,true),csize=view.getUint32(p+18,true),nlen=view.getUint16(p+26,true),elen=view.getUint16(p+28,true),name=new TextDecoder().decode(bytes.slice(p+30,p+30+nlen)),start=p+30+nlen+elen,raw=bytes.slice(start,start+csize);try{let out;if(method===0)out=raw;else if(method===8){const ds=new DecompressionStream('deflate-raw');out=new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(ds)).arrayBuffer())}else{p=start+csize;continue}files[name]=new TextDecoder().decode(out)}catch(e){}p=start+csize}return files}
+document.getElementById('ebookImportBtn').onclick=async()=>{const f=document.getElementById('ebookInput').files[0],status=document.getElementById('ebookStatus');if(!f){status.textContent='Chọn tệp EPUB hoặc PDF trước.';return}try{let content='',title=f.name.replace(/\.[^.]+$/,'');if(/\.epub$/i.test(f.name)){const files=await unzipTextEntries(await f.arrayBuffer());const container=files['META-INF/container.xml'];if(!container)throw Error('EPUB thiếu container.xml');const opfPath=new DOMParser().parseFromString(container,'application/xml').querySelector('rootfile')?.getAttribute('full-path');const opf=files[opfPath];if(!opf)throw Error('Không đọc được mục lục EPUB');const xml=new DOMParser().parseFromString(opf,'application/xml'),base=opfPath.split('/').slice(0,-1).join('/');const manifest={};xml.querySelectorAll('manifest item').forEach(x=>manifest[x.getAttribute('id')]=x.getAttribute('href'));const ids=[...xml.querySelectorAll('spine itemref')].map(x=>x.getAttribute('idref'));const chunks=[];for(const id of ids){const path=(base?base+'/':'')+manifest[id];if(files[path]){const d=new DOMParser().parseFromString(files[path],'text/html');chunks.push((d.body.innerText||d.body.textContent||'').trim())}}content=chunks.filter(Boolean).join('\\n\\n');title=xml.querySelector('metadata title')?.textContent||title;if(!content)throw Error('EPUB không có văn bản trích xuất được')}else if(/\.pdf$/i.test(f.name)){status.textContent='Đang tải PDF.js để trích xuất PDF (cần Internet)...';const pdfjs=await import('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs');pdfjs.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';const pdf=await pdfjs.getDocument({data:await f.arrayBuffer()}).promise;const pages=[];for(let i=1;i<=pdf.numPages;i++){const page=await pdf.getPage(i),tc=await page.getTextContent();pages.push(tc.items.map(x=>x.str).join(' '))}content=pages.join('\\n\\n');if(!content.trim())throw Error('PDF có thể là bản scan hình ảnh; chưa hỗ trợ OCR')}else throw Error('Chỉ hỗ trợ EPUB/PDF');document.getElementById('bookTitle').value=title;document.getElementById('bookContent').value=content;document.getElementById('bookUrl').value='';document.getElementById('modal').classList.add('open');status.textContent='Đã trích xuất nội dung. Bấm Lưu truyện để thêm vào thư viện.'}catch(e){status.textContent='Lỗi nhập sách: '+e.message}};
+
+
+// ULTRA V8 additive layer: preserves the existing V7 book/profile/video storage keys.
+const V8_TRASH_KEY='doc-truyen-ultra-v8-trash';
+const V8_BACKUP_KEY='doc-truyen-ultra-v8-restore-point';
+let v8Trash=(()=>{try{return JSON.parse(localStorage.getItem(V8_TRASH_KEY))||[]}catch(e){return []}})();
+function saveV8Trash(){localStorage.setItem(V8_TRASH_KEY,JSON.stringify(v8Trash))}
+function v8TrashBook(id){const b=books.find(x=>x.id===id);if(!b)return;localStorage.setItem(V8_BACKUP_KEY,JSON.stringify({books,profile,trash:v8Trash,at:Date.now()}));v8Trash.unshift({...b,deletedAt:Date.now()});books=books.filter(x=>x.id!==id);persist();if(currentId===id){document.getElementById('reader').classList.remove('active');currentId=null}saveV8Trash();render();renderTrash();fillSeriesSelect();toast('Đã chuyển truyện vào thùng rác')}
+function renderTrash(){const box=document.getElementById('trashList');box.innerHTML='';box.hidden=false;if(!v8Trash.length){box.textContent='Thùng rác đang trống.';return}v8Trash.forEach(b=>{const row=document.createElement('div');row.className='trash-row';const name=document.createElement('strong');name.textContent=b.title;const actions=document.createElement('div');actions.className='v8-actions';const restore=document.createElement('button');restore.textContent='Khôi phục';restore.onclick=()=>{books.unshift({...b});delete books[0].deletedAt;v8Trash=v8Trash.filter(x=>x.id!==b.id);persist();saveV8Trash();render();renderTrash();fillSeriesSelect();toast('Đã khôi phục truyện')};const remove=document.createElement('button');remove.className='danger';remove.textContent='Xóa vĩnh viễn';remove.onclick=()=>{if(!confirm('Xóa vĩnh viễn truyện này?'))return;v8Trash=v8Trash.filter(x=>x.id!==b.id);saveV8Trash();renderTrash()};actions.append(restore,remove);row.append(name,actions);box.append(row)})}
+document.getElementById('showTrashBtn').onclick=()=>renderTrash();
+document.getElementById('emptyTrashBtn').onclick=()=>{if(!v8Trash.length)return;if(!confirm('Xóa vĩnh viễn tất cả truyện trong thùng rác?'))return;v8Trash=[];saveV8Trash();renderTrash();toast('Đã dọn sạch thùng rác')};
+function fillSeriesSelect(){const sel=document.getElementById('seriesBookSelect'),keep=sel.value;sel.innerHTML='';books.forEach(b=>{const o=document.createElement('option');o.value=b.id;o.textContent=b.title;sel.append(o)});if(books.some(b=>b.id===keep))sel.value=keep;else if(books[0])sel.value=books[0].id;loadSeriesEditor()}
+function loadSeriesEditor(){const b=books.find(x=>x.id===document.getElementById('seriesBookSelect').value);if(!b)return;document.getElementById('seriesName').value=b.series||'';document.getElementById('seriesOrder').value=b.seriesOrder||'';document.getElementById('characterNames').value=(b.characters||[]).join(', ')}
+document.getElementById('seriesBookSelect').onchange=loadSeriesEditor;
+document.getElementById('saveSeriesBtn').onclick=()=>{const b=books.find(x=>x.id===document.getElementById('seriesBookSelect').value);if(!b){document.getElementById('seriesStatus').textContent='Chưa có truyện trong thư viện.';return}b.series=document.getElementById('seriesName').value.trim();b.seriesOrder=Number(document.getElementById('seriesOrder').value)||null;b.characters=document.getElementById('characterNames').value.split(',').map(x=>x.trim()).filter(Boolean);persist();render();document.getElementById('seriesStatus').textContent='Đã lưu bộ truyện và nhân vật.'};
+function activeStory(){return books.find(x=>x.id===currentId)||null}
+function localSummary(text){const clean=(text||'').replace(/\s+/g,' ').trim();if(!clean)return 'Truyện chưa có nội dung văn bản.';const sentences=clean.split(/(?<=[.!?…])\s+/).filter(x=>x.length>25);const chosen=sentences.length?sentences.slice(0,Math.min(5,sentences.length)): [clean.slice(0,650)];return 'TÓM TẮT NHANH (xử lý cục bộ, không phải mô hình AI):\n'+chosen.join('\n')+(clean.length>1800?'\n\nNội dung còn lại được lược bớt trong bản tóm tắt nhanh.':'')}
+document.getElementById('localSummaryBtn').onclick=()=>{const b=activeStory();document.getElementById('localAssistResult').textContent=b?localSummary(b.content):'Hãy mở một truyện trước.'};
+document.getElementById('localCharactersBtn').onclick=()=>{const b=activeStory();if(!b){document.getElementById('localAssistResult').textContent='Hãy mở một truyện trước.';return}const words=(b.content||'').match(/\b[A-ZÀ-ỸĐ][a-zà-ỹđ]{1,}(?:\s+[A-ZÀ-ỸĐ][a-zà-ỹđ]{1,}){0,2}\b/g)||[];const counts={};words.forEach(w=>counts[w]=(counts[w]||0)+1);document.getElementById('localAssistResult').textContent='GỢI Ý TÊN RIÊNG (có thể có từ bị nhận diện nhầm):\n'+Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,20).map(x=>x[0]+' ('+x[1]+')').join(', ')};
+document.getElementById('v8BackupBtn').onclick=()=>{const pack={app:'DocTruyenUltra',version:8,createdAt:new Date().toISOString(),books,trash:v8Trash,profile,videos};downloadJSON(pack,'doc-truyen-ultra-v8-backup.json');localStorage.setItem(V8_BACKUP_KEY,JSON.stringify({books,profile,trash:v8Trash,at:Date.now()}));document.getElementById('backupStatus').textContent='Đã tạo tệp sao lưu và mốc khôi phục cục bộ.'};
+document.getElementById('v8RestoreBtn').onclick=()=>{try{const d=JSON.parse(localStorage.getItem(V8_BACKUP_KEY)||'null');if(!d||!Array.isArray(d.books))throw Error('Chưa có mốc khôi phục');if(!confirm('Khôi phục mốc gần nhất? Thư viện hiện tại sẽ được thay thế bằng mốc này.'))return;books=d.books;v8Trash=d.trash||[];if(d.profile)profile=d.profile;persist();saveProfile();saveV8Trash();render();renderProfile();renderTrash();fillSeriesSelect();document.getElementById('backupStatus').textContent='Đã khôi phục mốc cục bộ.'}catch(e){document.getElementById('backupStatus').textContent=e.message}};
+function exportActive(kind){const b=activeStory();if(!b){toast('Hãy mở truyện cần xuất trước.');return}const safe=(b.title||'truyen').replace(/[\\/:*?"<>|]+/g,'_');if(kind==='txt'){const blob=new Blob([b.title+'\n\n'+(b.content||'')],{type:'text/plain;charset=utf-8'});const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=safe+'.txt';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}else if(kind==='html'){const html='<!doctype html><html lang="vi"><meta charset="utf-8"><title>'+escapeHTML(b.title)+'</title><body><h1>'+escapeHTML(b.title)+'</h1><pre style="white-space:pre-wrap;font:18px/1.7 Georgia,serif">'+escapeHTML(b.content||'')+'</pre></body></html>';const u=URL.createObjectURL(new Blob([html],{type:'text/html;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download=safe+'.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}}
+function crc32(bytes){let c=-1;for(const b of bytes){c^=b;for(let k=0;k<8;k++)c=(c>>>1)^((c&1)?0xedb88320:0)}return (c^-1)>>>0}
+function makeStoredZip(entries){const enc=new TextEncoder(),locals=[],centrals=[];let offset=0;for(const entry of entries){const name=enc.encode(entry.name),data=typeof entry.data==='string'?enc.encode(entry.data):entry.data,crc=crc32(data),local=new Uint8Array(30+name.length+data.length),lv=new DataView(local.buffer);lv.setUint32(0,0x04034b50,true);lv.setUint16(4,20,true);lv.setUint16(6,0,true);lv.setUint16(8,0,true);lv.setUint32(14,crc,true);lv.setUint32(18,data.length,true);lv.setUint32(22,data.length,true);lv.setUint16(26,name.length,true);local.set(name,30);local.set(data,30+name.length);locals.push(local);const central=new Uint8Array(46+name.length),cv=new DataView(central.buffer);cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint16(8,0,true);cv.setUint16(10,0,true);cv.setUint32(16,crc,true);cv.setUint32(20,data.length,true);cv.setUint32(24,data.length,true);cv.setUint16(28,name.length,true);cv.setUint32(42,offset,true);central.set(name,46);centrals.push(central);offset+=local.length}const centralSize=centrals.reduce((n,x)=>n+x.length,0),end=new Uint8Array(22),ev=new DataView(end.buffer);ev.setUint32(0,0x06054b50,true);ev.setUint16(8,entries.length,true);ev.setUint16(10,entries.length,true);ev.setUint32(12,centralSize,true);ev.setUint32(16,offset,true);return new Blob([...locals,...centrals,end],{type:'application/epub+zip'})}
+function exportEpub(){const b=activeStory();if(!b){toast('Hãy mở truyện cần xuất trước.');return}const encTitle=escapeHTML(b.title),body=escapeHTML(b.content||'').replace(/\n/g,'<br/>'),uid='urn:uuid:'+((b.id||'story').replace(/[^a-z0-9-]/gi,'-'));const container='<?xml version="1.0" encoding="UTF-8"?><container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/></rootfiles></container>';const opf='<?xml version="1.0" encoding="UTF-8"?><package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="bookid"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:identifier id="bookid">'+uid+'</dc:identifier><dc:title>'+encTitle+'</dc:title><dc:language>vi</dc:language></metadata><manifest><item id="chapter" href="chapter.xhtml" media-type="application/xhtml+xml"/></manifest><spine><itemref idref="chapter"/></spine></package>';const xhtml='<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" lang="vi"><head><title>'+encTitle+'</title><meta charset="utf-8"/></head><body><h1>'+encTitle+'</h1><p>'+body+'</p></body></html>';const blob=makeStoredZip([{name:'mimetype',data:'application/epub+zip'},{name:'META-INF/container.xml',data:container},{name:'OEBPS/content.opf',data:opf},{name:'OEBPS/chapter.xhtml',data:xhtml}]);const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=(b.title||'truyen').replace(/[\\/:*?"<>|]+/g,'_')+'.epub';a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+document.getElementById('exportTxtBtn').onclick=()=>exportActive('txt');document.getElementById('exportHtmlBtn').onclick=()=>exportActive('html');document.getElementById('exportEpubBtn').onclick=exportEpub;document.getElementById('printStoryBtn').onclick=()=>{const b=activeStory();if(!b){toast('Hãy mở truyện trước.');return}const w=window.open('','_blank');if(!w){toast('Trình duyệt chặn cửa sổ in.');return}w.document.write('<!doctype html><meta charset="utf-8"><title>'+escapeHTML(b.title)+'</title><h1>'+escapeHTML(b.title)+'</h1><pre style="white-space:pre-wrap;font:16px/1.7 Georgia,serif">'+escapeHTML(b.content||'')+'</pre>');w.document.close();w.focus();w.print()};
+document.getElementById('v8MotionBtn').onclick=()=>{document.body.classList.toggle('v8-motion');document.getElementById('v8VisualStatus').textContent=document.body.classList.contains('v8-motion')?'Đã bật hiệu ứng chuyển động 3D.':'Đã tắt hiệu ứng 3D.'};
+document.getElementById('v8FocusBtn').onclick=()=>{const r=document.getElementById('reader');if(!r.classList.contains('active')){toast('Mở truyện trước khi bật chế độ tập trung.');return}r.classList.toggle('focus-v8');document.getElementById('v8FocusBtn').textContent=r.classList.contains('focus-v8')?'Thoát tập trung':'Tập trung đọc'};
+document.getElementById('privacyInfoBtn').onclick=()=>{const x=document.getElementById('privacyInfo');x.hidden=!x.hidden};
+function initV8(){fillSeriesSelect();renderTrash()}
+initV8();
+
+window.addEventListener('pagehide',()=>{if('speechSynthesis'in window)speechSynthesis.cancel()});
+render();renderProfile();
+</script>
+</body>
+</html>
